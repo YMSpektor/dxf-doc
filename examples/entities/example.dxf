@@ -15,7 +15,7 @@ $EXTMIN
   9
 $EXTMAX
  10
-250
+400
  20
 100
   9
@@ -27,13 +27,13 @@ $LIMMIN
   9
 $LIMMAX
  10
-250
+400
  20
 100
   9
 $HANDSEED
   5
-11C
+11E
   0
 ENDSEC
   0
@@ -654,6 +654,56 @@ AcDbText
 Hello World!
 100
 AcDbText
+  0
+ELLIPSE
+  5
+11C
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+100
+AcDbEllipse
+ 10
+280
+ 20
+40
+ 11
+30
+ 21
+10
+ 40
+0.5000
+ 41
+0
+ 42
+6.2832
+  0
+ARC
+  5
+11D
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+100
+AcDbCircle
+ 10
+360
+ 20
+40
+ 40
+30
+100
+AcDbArc
+ 50
+0
+ 51
+270
   0
 ENDSEC
   0

@@ -11,11 +11,13 @@ The class provides the following oprations
 * addEntity/addEntities
 * extents - the shorthand to define drawing extents in the header
 * limits - the shorthand to define drawing limits in the header
-* dxf - returns dxf file contens as a string
+* dxf - returns dxf file content as a string
 
 ## Supported entity types
 * LINE
 * CIRCLE
+* ELLIPSE
+* ARC
 * LWPOLYLINE
 * TEXT
 * HATCH
@@ -23,7 +25,7 @@ The class provides the following oprations
 ## Example
 ```JavaScript
 const { DxfDocument } = require('dxf-doc');
-const { Line, Circle, LwPolyline, Text, Hatch } = require('dxf-doc/entities');
+const { Line, Circle, LwPolyline, Text, Hatch, Ellipse, Arc } = require('dxf-doc/entities');
 const { HatchPattern, PolylineBoundaryPath } = require('dxf-doc/entities/hatch');
 
 const fs = require('fs');
@@ -46,6 +48,8 @@ HatchPattern.readFileAsync(__dirname + '/acad.pat').then(patterns => {
             new PolylineBoundaryPath(pts)
         ], patterns[0]),
         new Text(dxf, 'Hello World!', 5, [200, 50]),
+        new Ellipse(dxf, 280, 40, 30, 10, 0.5),
+        new Arc(dxf, 360, 40, 30, 0, 270)
     );
 
     // Save to file
