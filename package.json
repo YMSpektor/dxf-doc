@@ -1,0 +1,37 @@
+{
+  "name": "dxf-doc",
+  "version": "0.1.0",
+  "description": "JavaScript library for writing DXF files",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YMSpektor/dxf-doc.git"
+  },
+  "keywords": [
+    "DXF",
+    "CAD",
+    "AutoCAD"
+  ],
+  "author": "Yuri Spektor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YMSpektor/dxf-doc/issues"
+  },
+  "homepage": "https://github.com/YMSpektor/dxf-doc#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.2",
+    "@types/node": "^12.12.14",
+    "@types/line-reader": "0.0.28"
+  },
+  "dependencies": {
+    "line-reader": "^0.4.0"
+  }
+}
