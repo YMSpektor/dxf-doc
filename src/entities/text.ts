@@ -1,16 +1,16 @@
 import { Entity } from ".";
 import { DxfWriter, DxfDocument } from "..";
 
-export enum TEXT_ALIGN {
+export enum TextAlign {
     LEFT,
-    CENTER1,
+    CENTER,
     RIGHT,
     ALIGNED,
     MIDDLE,
     FIT
 }
 
-export enum TEXT_VERTICAL_ALIGN {
+export enum TextVerticalAlign {
     BASELINE,
     BOTTOM,
     MIDDLE,
@@ -25,9 +25,9 @@ export class Text extends Entity {
         public text: string,
         public height: number,
         public alignPoint: [number, number],
-        public align?: TEXT_ALIGN,
+        public align?: TextAlign,
         public secondAlignPoint?: [number, number],
-        public valign?: TEXT_VERTICAL_ALIGN,
+        public valign?: TextVerticalAlign,
         public rotation?: number,
         ownerHandle?: string
     ) {

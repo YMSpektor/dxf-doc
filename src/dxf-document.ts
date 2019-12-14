@@ -1,6 +1,7 @@
 import { DxfTextWriter } from "./dxf-writer";
 import { Section, Table, LType, Layer, Style, AppId, BlockRecord, Block, BlockEnd, DimStyleTable, Dictionary, Entity } from "./entities";
 import { HeaderVariable } from "./entities/header-variables";
+import { StyleFlags } from "./entities/style";
 
 export class DxfDocument {
     private _nextHandle = 256;
@@ -71,8 +72,8 @@ export class DxfDocument {
         return ltype;
     }
 
-    addStyle(name: string, font: string = Style.FONT_DEFAULT): Style {
-        const style = new Style(name, font, this.nextHandle(), this.styleTable.handle);
+    addStyle(name: string, font: string = Style.FONT_DEFAULT, flags = StyleFlags.NONE): Style {
+        const style = new Style(name, font, this.nextHandle(), this.styleTable.handle, flags);
         this.styleTable.entries.push(style);
         return style;
     }

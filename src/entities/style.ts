@@ -1,6 +1,12 @@
 import { TableRecord } from "./table";
 import { DxfWriter } from "..";
 
+export enum StyleFlags {
+    NONE = 2,
+    ITALIC = 0x1000000,
+    BOLD = 0x2000000
+}
+
 export class Style extends TableRecord {
     public static STANDARD = 'Standard';
     public static FONT_DEFAULT = 'txt';
@@ -10,6 +16,7 @@ export class Style extends TableRecord {
         public font: string,
         handle: string,
         public ownerHandle: string,
+        public styleFlags = StyleFlags.NONE,
         public verticalText = false,
         public fixedHeight = false,
         public widthFactor = 1,
@@ -32,5 +39,10 @@ export class Style extends TableRecord {
         writer.writeGroup(42, 1);
         writer.writeGroup(3, this.font);
         writer.writeGroup(4, this.bigfont);
+        if (this.styleFlags != StyleFlags.NONE) {
+            writer.writeGroup(1001, 'ACAD');
+            writer.writeGroup(1000, this.font);
+            writer.writeGroup(1071, this.styleFlags);
+        }
     }
 }
