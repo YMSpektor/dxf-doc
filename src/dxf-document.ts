@@ -71,8 +71,8 @@ export class DxfDocument {
         return ltype;
     }
 
-    addStyle(font: string): Style {
-        const style = new Style(font, this.nextHandle(), this.styleTable.handle);
+    addStyle(name: string, font: string = Style.FONT_DEFAULT): Style {
+        const style = new Style(name, font, this.nextHandle(), this.styleTable.handle);
         this.styleTable.entries.push(style);
         return style;
     }
