@@ -7,10 +7,10 @@ export class Insert extends Entity {
         public blockName: string,
         public x: number,
         public y: number,
+        public rotation: number = 0,
         public scaleX: number = 1,
         public scaleY: number = 1,
         public scaleZ: number = 1,
-        public rotation: number = 0,
         ownerHandle?: string
     ) {
         super('INSERT', doc.nextHandle(), ownerHandle); 
@@ -29,14 +29,3 @@ export class Insert extends Entity {
     }
 }
 
-// 70
-// Column count (optional; default = 1)
-// 71
-// Row count (optional; default = 1)
-// 44
-// Column spacing (optional; default = 0)
-// 45
-// Row spacing (optional; default = 0)
-// 210
-// Extrusion direction (optional; default = 0, 0, 1)
-// DXF: X value; APP: 3D vector
