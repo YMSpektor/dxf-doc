@@ -15,3 +15,4 @@ export { Text } from './text';
 export { Hatch } from './hatch';
 export { Ellipse } from './ellipse';
 export { Arc } from './arc';
+export { Insert } from './insert';
