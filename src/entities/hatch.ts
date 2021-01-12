@@ -1,5 +1,3 @@
-import * as LineReader from 'line-reader';
-
 import { Entity } from ".";
 import { DxfDocument, DxfWriter } from "..";
 import { DxfObject } from "../dxf-object";
@@ -61,47 +59,39 @@ export class HatchPattern implements DxfObject {
 
     constructor(public name: string, public lines: HatchPatterLine[]) { }
 
-    static readFileAsync(path: string): Promise<HatchPattern[]> {
-        return new Promise((resolve, reject) => {
-            LineReader.open(path, (err, reader) => {
-                if (err) reject(err);
-                const result: HatchPattern[] = [];
-                let pattern: HatchPattern | null = null;
-                while (reader.hasNextLine()) {
-                    if (err) reject(err);
-                    reader.nextLine((err, line) => {
-                        line = line.trim();
-                        if (line.length) {
-                            // New pattern
-                            if (line[0] === '*') {
-                                const nameMatch = line.match(/\*(\w+),?/);
-                                if (nameMatch) {
-                                    pattern = new HatchPattern(nameMatch[1], []);
-                                    result.push(pattern);
-                                }
-                            }
-                            // Line data
-                            else if (pattern) {
-                                const lineData = line.split(',').map(x => parseFloat(x.trim()));
-                                if (lineData.length >= 5) {
-                                    const patternLine = {
-                                        angle: lineData[0],
-                                        x: lineData[1],
-                                        y: lineData[2],
-                                        offsetX: lineData[3],
-                                        offsetY: lineData[4],
-                                        dashes: lineData.slice(5)
-                                    };
-                                    pattern.lines.push(patternLine);
-                                }
-                            }
-                        }
-                    });
+    static parse(lines: string[]): HatchPattern[] {
+        const result: HatchPattern[] = [];
+        let pattern: HatchPattern | null = null;
+        for (let line of lines)
+        {
+            line = line.trim();
+            if (line.length) {
+                // New pattern
+                if (line[0] === '*') {
+                    const nameMatch = line.match(/\*(\w+),?/);
+                    if (nameMatch) {
+                        pattern = new HatchPattern(nameMatch[1], []);
+                        result.push(pattern);
+                    }
                 }
-
-                resolve(result);
-            });
-        });
+                // Line data
+                else if (pattern) {
+                    const lineData = line.split(',').map(x => parseFloat(x.trim()));
+                    if (lineData.length >= 5) {
+                        const patternLine = {
+                            angle: lineData[0],
+                            x: lineData[1],
+                            y: lineData[2],
+                            offsetX: lineData[3],
+                            offsetY: lineData[4],
+                            dashes: lineData.slice(5)
+                        };
+                        pattern.lines.push(patternLine);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     writeDxf(writer: DxfWriter): void {
